@@ -4,6 +4,16 @@ mod paste_id;
 
 use paste_id::PasteId;
 
+use std::path::Path;
+use rocket::tokio::fs::File;
+
+#[get("/<id>")]
+async fn retrieve(id: &str) -> Option<File> {
+    let upload_dir = concat!(env!("CARGO_MANIFEST_DIR"), "/", "upload");
+    let filename = Path::new(upload_dir).join(id);
+    File::open(&filename).await.ok()
+}
+
 #[get("/")]
 fn index() -> &'static str {
     "
@@ -22,5 +32,5 @@ fn index() -> &'static str {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+    rocket::build().mount("/", routes![index, retrieve])
 }
