@@ -1,7 +1,6 @@
 #[macro_use] extern crate rocket;
 mod paste_id;
 use paste_id::PasteId;
-use std::path::Path;
 use rocket::{
     http::uri::Absolute,
     data::{
