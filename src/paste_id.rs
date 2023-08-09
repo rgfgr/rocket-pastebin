@@ -26,6 +26,7 @@ impl<'a> FromParam<'a> for PasteId<'a> {
 }
 
 /// A _probably_ unique paste ID.
+#[derive(UriDisplayPath)]
 pub struct PasteId<'a>(Cow<'a, str>);
 
 impl PasteId<'_> {
