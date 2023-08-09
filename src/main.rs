@@ -1,5 +1,9 @@
 #[macro_use] extern crate rocket;
 
+mod paste_id;
+
+use paste_id::PasteId;
+
 #[get("/")]
 fn index() -> &'static str {
     "
